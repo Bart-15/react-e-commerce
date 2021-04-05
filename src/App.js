@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { commerce } from './components/lib/commerce'
 import { NavBar, Products, Cart, Checkout } from './components'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import './index.css'
 const App = () => {
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState({})
   const [order,setOrder] = useState({})
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('');
+  const [search, setSearch] = useState('')
+  const [filteredProducts, setFilteredProducts] = useState([])
   //Fetch all the products
   const fetchProducts = async () => {
     const { data } = await commerce.products.list()
@@ -64,16 +67,20 @@ const App = () => {
     fetchCart()
   }, [])
 
+  //Hande dark mode
+
+ 
   //console debug
-  console.log(cart)
+  // console.log(cart)
+
 
   return (
     <Router>
       <div>
-        <NavBar totalItems={cart.total_items} />
+        <NavBar totalItems={cart.total_items} setSearch={setSearch} />
         <Switch>
           <Route exact path='/'>
-            <Products products={products} onAddToCart={handleAddToCart} />
+            <Products products={products} onAddToCart={handleAddToCart} search={search} setFilteredProducts={setFilteredProducts} filteredProducts={filteredProducts}/>
           </Route>
           <Route exact path='/cart'>
             <Cart

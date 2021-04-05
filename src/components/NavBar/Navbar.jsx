@@ -4,15 +4,16 @@ import {
   Toolbar,
   IconButton,
   Badge,
-  MenuItem,
-  Menu,
   Typography,
+
 } from '@material-ui/core'
 import { ShoppingCart } from '@material-ui/icons'
+import InputBase from '@material-ui/core/InputBase'
+import SearchIcon from '@material-ui/icons/Search'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../../img/logo.jpg'
 import useStyles from './style'
-const Navbar = ({ totalItems }) => {
+const Navbar = ({ totalItems, setSearch }) => {
   const classes = useStyles()
   const location = useLocation()
   return (
@@ -26,15 +27,32 @@ const Navbar = ({ totalItems }) => {
             className={classes.title}
             color='inherit'
           >
-            <img
+            {/* <img
               src={logo}
               alt='Hopia'
               height='25px'
               className={classes.image}
-            />
-            Hopia
+            /> */}
+            Bart'y 
           </Typography>
           {location.pathname === '/' && (
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder='Search for an item'
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          )}
+          {location.pathname === '/' && (
+            <div>
             <div className={classes.grow}>
               <div className={classes.button}>
                 <IconButton
@@ -48,6 +66,7 @@ const Navbar = ({ totalItems }) => {
                   </Badge>
                 </IconButton>
               </div>
+            </div>
             </div>
           )}
         </Toolbar>

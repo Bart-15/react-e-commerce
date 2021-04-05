@@ -20,9 +20,10 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   const [activeStep, setActiveStep] = useState(0)
   const [checkoutToken, setCheckoutToken] = useState(null)
   const [shippingData, setShippingData] = useState({})
+  const [finish, isFinished] = useState(false)
+  const history = useHistory();
 
   //get the token id
-
   useEffect(() => {
     const generateToken = async () => {
       try {
@@ -32,7 +33,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         setCheckoutToken(token)
         console.log(token)
       } catch (error) {
-        history.pushState('/')
+        history.push('/')
       }
     }
 
@@ -47,13 +48,18 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
     nextStep()
   }
 
+  const timeout = () => {
+    setTimeout(() => {
+      isFinished(true)
+    }, 3000)
+  }
+
   let Confirmation = () =>
     order.customer ? (
       <>
         <div>
           <Typography variant='h5'>
             Thank you for your purchase, {order.customer.firstname}{' '}
-            {order.customer.lastname}!
           </Typography>
           <Divider className={classes.divider} />
           <Typography variant='subtitle2'>
@@ -65,6 +71,14 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
           Back to home
         </Button>
       </>
+    ) : isFinished ? (
+      <div>
+        <Typography variant='h5'>Thank you for your purchase</Typography>
+        <Divider className={classes.divider} />
+        <Button component={Link} variant='outlined' type='button' to='/'>
+          Back to home
+        </Button>
+      </div>
     ) : (
       <div className={classes.spinner}>
         <CircularProgress />
@@ -96,6 +110,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         backStep={backStep}
         onCaptureCheckout={onCaptureCheckout}
         nextStep={nextStep}
+        timeout={timeout}
       />
     )
 
