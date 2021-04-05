@@ -13,14 +13,13 @@ export default makeStyles((theme) => ({
   },
   progress: {
     [theme.breakpoints.down('sm')]: {
-      marginTop: '250px',
       display: 'block',
       margin: '0 auto',
       display: 'flex',
       color: '#21c8ed',
     },
     [theme.breakpoints.up('md')]: {
-      marginTop: '350px',
+      
     },
   },
   noProduct: {
@@ -32,4 +31,13 @@ export default makeStyles((theme) => ({
     padding: '10px',
     height: '90vh',
   },
+
+  searchImg : {
+    [theme.breakpoints.down('sm')] : {
+      height:'100px'
+    },
+     [theme.breakpoints.up('md')] : {
+      height:'300px'
+    }
+  }
 }))

@@ -4,7 +4,8 @@ export default makeStyles(() => ({
   root: {
     // maxWidth: 345, original width style
     maxWidth: '100%',
-    maxHeight:'120%'
+    maxHeight: '120%',
+    cursor: 'pointer',
   },
   media: {
     height: 0,

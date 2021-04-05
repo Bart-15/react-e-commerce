@@ -2,13 +2,19 @@ import React from 'react'
 import { Container, Typography, Button, Grid } from '@material-ui/core'
 import useStyles from './styles'
 import CartItem from './CartItem/CartItem'
+import empty from '../../img/empty.svg'
 import {Link} from 'react-router-dom'
 const Cart = ({ cart, updateCart, removeCart, emptyCart }) => {
   const classes = useStyles()
+
+
   const EmptyCart = () => (
-    <Typography variant='subtitle1'>
-      Your shopping cart is empty, <Link to="/"> Shop Now!</Link>
-    </Typography>
+    <div className={classes.emptyCart}>
+     <img className={classes.emptyImg} src={empty} alt="emptyCart"/>
+      <Typography variant='subtitle1'>
+        Your shopping cart is empty, <Link to='/'> Shop Now!</Link>
+      </Typography>
+    </div>
   )
   
 

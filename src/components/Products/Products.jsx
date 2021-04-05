@@ -3,6 +3,7 @@ import { Grid, Typography } from '@material-ui/core'
 import Product from './Product/Product'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { css } from '@emotion/core'
+import searchPhoto from '../../img/search.svg'
 import useStyles from './styles'
 
 const override = css`
@@ -64,8 +65,9 @@ const Products = ({
   const NoProduct = () => {
     return (
       <Grid className={classes.noProduct} container justify='center' spacing={2}>
+        <img className={classes.searchImg} src={searchPhoto} alt="Search"/>
         <Typography variant='h5'>
-          Your search {`"${search}"`} did not match any listings.
+          Your search {`"${search}"`} did not match any products.
         </Typography>
         <Typography variant='subtitle1'>
           Try another search, check if the spelling is correct or try more

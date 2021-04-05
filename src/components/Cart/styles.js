@@ -29,4 +29,18 @@ export default makeStyles((theme) => ({
     width: '100%',
     justifyContent: 'space-between',
   },
+  emptyCart : {
+    [theme.breakpoints.up('md')] : {
+      display: 'flex',
+      alignItems:'center',
+      justifyContent:'center',
+      fontSize:'30px'
+    }
+  },
+  emptyImg : {
+    height:'500px',
+    [theme.breakpoints.down('sm')] : {
+      height:'300px'
+    }
+  }
 }))

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { commerce } from './components/lib/commerce'
-import { NavBar, Products, Cart, Checkout } from './components'
+import { NavBar, Products, Cart, Checkout, Hero, Footer } from './components'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import './index.css'
 const App = () => {
@@ -10,6 +10,9 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [search, setSearch] = useState('')
   const [filteredProducts, setFilteredProducts] = useState([])
+  
+  
+
   //Fetch all the products
   const fetchProducts = async () => {
     const { data } = await commerce.products.list()
@@ -77,10 +80,17 @@ const App = () => {
   return (
     <Router>
       <div>
-        <NavBar totalItems={cart.total_items} setSearch={setSearch} />
+        <NavBar totalItems={cart.total_items} setSearch={setSearch} search={search} />
         <Switch>
           <Route exact path='/'>
-            <Products products={products} onAddToCart={handleAddToCart} search={search} setFilteredProducts={setFilteredProducts} filteredProducts={filteredProducts}/>
+            {!search && <Hero />}
+            <Products
+              products={products}
+              onAddToCart={handleAddToCart}
+              search={search}
+              setFilteredProducts={setFilteredProducts}
+              filteredProducts={filteredProducts}
+            />
           </Route>
           <Route exact path='/cart'>
             <Cart
@@ -99,6 +109,7 @@ const App = () => {
             />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   )
